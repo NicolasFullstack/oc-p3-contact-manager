@@ -29,20 +29,39 @@ foreach ($rows as $row) {
 return $contacts;
     }
 
+    public function findById(int $id): Contact
+    {
+        $requete = $this->pdo->prepare
+        ("SELECT * FROM contact WHERE id = :id");
 
+        $requete->execute(['id' => $id]);
 
+        $row = $requete->fetch();
 
+        $contact = new Contact();
 
+        $contact->setId($row['id']);
+        $contact->setName($row['name']);
+        $contact->setEmail($row['email']);
+        $contact->setPhoneNumber($row['phone_number']);
 
-
-
-
-
-
-
-
-
-
-
-
+        return $contact;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

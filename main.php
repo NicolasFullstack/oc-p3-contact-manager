@@ -11,5 +11,13 @@ while (true) {
     $command = new Command();
     $command->list();
 }
+if (preg_match('/^detail ([0-9]+)$/', $line, $matches)) {
+
+    $command = new Command();
+
+    $command->detail($matches[1]);
 }
+
+}
+
     
