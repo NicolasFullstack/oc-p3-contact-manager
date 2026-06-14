@@ -61,6 +61,15 @@ $requete->execute([
     'phone_number' => $phoneNumber
 ]);
 }
+
+    public function delete(int $id): void
+{
+    $requete = $this->pdo->prepare(
+    "DELETE FROM contact WHERE id = :id"
+);
+
+    $requete->execute(['id' => $id]);
+}
 }
 
 

@@ -36,4 +36,15 @@ $contactManager = new ContactManager($dbConnect->getPDO());
 
 $contactManager->create($name,$email,$phoneNumber);
 }
+
+
+public function delete(int $id): void
+{
+    $dbConnect = new DBConnect();
+
+$contactManager = new ContactManager(
+    $dbConnect->getPDO()
+);
+$contactManager->delete($id);
+}
 }

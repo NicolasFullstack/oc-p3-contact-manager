@@ -30,6 +30,13 @@ $command = new Command();
         $matches[3]
     );
 }
+
+if (preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
+
+    $command = new Command();
+
+    $command->delete($matches[1]);
+}
 }
 
     
