@@ -13,7 +13,9 @@ public function list(): void
      foreach ($contacts as $contact) 
         {echo $contact->toString() . PHP_EOL;}
 }
-     public function detail(int $id): void
+
+
+public function detail(int $id): void
 {
     
      $dbConnect = new DBConnect();
@@ -23,5 +25,15 @@ public function list(): void
     $contact = $contactManager->findById($id);
 
     echo $contact->toString() . PHP_EOL;
+}
+
+
+public function create(string $name, string $email, string $phoneNumber): void
+{
+    $dbConnect = new DBConnect();
+
+$contactManager = new ContactManager($dbConnect->getPDO());
+
+$contactManager->create($name,$email,$phoneNumber);
 }
 }

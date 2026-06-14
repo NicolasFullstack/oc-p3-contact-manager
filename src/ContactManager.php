@@ -8,6 +8,7 @@ class ContactManager
     {
         $this->pdo = $pdo;
     }
+
     public function findAll(): array
     {
         // Implementation for finding all contacts
@@ -47,6 +48,19 @@ return $contacts;
 
         return $contact;
     }
+
+    public function create(string $name,string $email,string $phoneNumber): void
+{
+$requete = $this->pdo->prepare(
+    "INSERT INTO contact (name, email, phone_number)
+     VALUES (:name, :email, :phone_number)"
+);
+$requete->execute([
+    'name' => $name,
+    'email' => $email,
+    'phone_number' => $phoneNumber
+]);
+}
 }
 
 

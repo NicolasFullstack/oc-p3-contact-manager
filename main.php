@@ -11,13 +11,25 @@ while (true) {
     $command = new Command();
     $command->list();
 }
-if (preg_match('/^detail ([0-9]+)$/', $line, $matches)) {
+
+if (preg_match('/^detail ([0-9]+)$/', $line, $matches)) 
+{
 
     $command = new Command();
 
     $command->detail($matches[1]);
 }
 
+if (preg_match('/^create (.+),(.+),(.+)$/', $line, $matches)) 
+{
+$command = new Command();
+
+    $command->create(
+        $matches[1],
+        $matches[2],
+        $matches[3]
+    );
+}
 }
 
     
