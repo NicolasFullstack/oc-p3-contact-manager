@@ -70,6 +70,24 @@ $requete->execute([
 
     $requete->execute(['id' => $id]);
 }
+
+public function modify(int $id,string $name,string $email,string $phoneNumber): void
+{
+$requete = $this->pdo->prepare(
+    "UPDATE contact
+     SET name = :name,
+         email = :email,
+         phone_number = :phone_number
+     WHERE id = :id"
+);
+$requete->execute([
+    'name' => $name,
+    'email' => $email,
+    'phone_number' => $phoneNumber,
+    'id' => $id
+]);
+}
+
 }
 
 

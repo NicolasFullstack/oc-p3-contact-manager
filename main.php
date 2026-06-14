@@ -37,6 +37,21 @@ if (preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
 
     $command->delete($matches[1]);
 }
+
+if ($line === 'help') {
+    $command = new Command();
+    $command->help();
 }
 
-    
+    if (preg_match('/^modify ([0-9]+),(.+),(.+),(.+)$/', $line, $matches)) {
+
+        $command = new Command();
+
+        $command->modify(
+            $matches[1],
+            $matches[2],
+            $matches[3],
+            $matches[4]
+        );
+    }
+}
