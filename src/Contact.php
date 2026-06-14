@@ -46,7 +46,7 @@ public function getId(): int
     {
         $this->phone_number = $phone_number;
     }
-public function toString(): string
+public function __toString(): string
 {
     return $this->id . " - " .
            $this->name . " - " .

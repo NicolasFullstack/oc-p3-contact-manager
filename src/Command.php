@@ -11,7 +11,7 @@ public function list(): void
     $contacts = $contactManager->findAll();
 
      foreach ($contacts as $contact) 
-        {echo $contact->toString() . PHP_EOL;}
+        {echo $contact . PHP_EOL;}
 }
 
 
@@ -24,7 +24,7 @@ public function detail(int $id): void
 
     $contact = $contactManager->findById($id);
 
-    echo $contact->toString() . PHP_EOL;
+    echo $contact . PHP_EOL;
 }
 
 
