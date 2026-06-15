@@ -13,27 +13,26 @@ class ContactManager
     {
         // Implementation for finding all contacts
         $result = $this->pdo->query("SELECT * FROM contact");
-         
+
         $rows = $result->fetchAll();
 
-$contacts = [];
-foreach ($rows as $row) {
-    $contact = new Contact();
-    $contact->setId($row['id']);
-    $contact->setName($row['name']);
-    $contact->setEmail($row['email']);
-    $contact->setPhoneNumber($row['phone_number']);
-    $contacts[] = $contact;
-}
+        $contacts = [];
+        foreach ($rows as $row) {
+            $contact = new Contact();
+            $contact->setId($row['id']);
+            $contact->setName($row['name']);
+            $contact->setEmail($row['email']);
+            $contact->setPhoneNumber($row['phone_number']);
+            $contacts[] = $contact;
+        }
 
 
-return $contacts;
+        return $contacts;
     }
 
     public function findById(int $id): Contact
     {
-        $requete = $this->pdo->prepare
-        ("SELECT * FROM contact WHERE id = :id");
+        $requete = $this->pdo->prepare("SELECT * FROM contact WHERE id = :id");
 
         $requete->execute(['id' => $id]);
 
@@ -49,60 +48,42 @@ return $contacts;
         return $contact;
     }
 
-    public function create(string $name,string $email,string $phoneNumber): void
-{
-$requete = $this->pdo->prepare(
-    "INSERT INTO contact (name, email, phone_number)
+    public function create(string $name, string $email, string $phoneNumber): void
+    {
+        $requete = $this->pdo->prepare(
+            "INSERT INTO contact (name, email, phone_number)
      VALUES (:name, :email, :phone_number)"
-);
-$requete->execute([
-    'name' => $name,
-    'email' => $email,
-    'phone_number' => $phoneNumber
-]);
-}
+        );
+        $requete->execute([
+            'name' => $name,
+            'email' => $email,
+            'phone_number' => $phoneNumber
+        ]);
+    }
 
     public function delete(int $id): void
-{
-    $requete = $this->pdo->prepare(
-    "DELETE FROM contact WHERE id = :id"
-);
+    {
+        $requete = $this->pdo->prepare(
+            "DELETE FROM contact WHERE id = :id"
+        );
 
-    $requete->execute(['id' => $id]);
-}
+        $requete->execute(['id' => $id]);
+    }
 
-public function modify(int $id,string $name,string $email,string $phoneNumber): void
-{
-$requete = $this->pdo->prepare(
-    "UPDATE contact
+    public function modify(int $id, string $name, string $email, string $phoneNumber): void
+    {
+        $requete = $this->pdo->prepare(
+            "UPDATE contact
      SET name = :name,
          email = :email,
          phone_number = :phone_number
      WHERE id = :id"
-);
-$requete->execute([
-    'name' => $name,
-    'email' => $email,
-    'phone_number' => $phoneNumber,
-    'id' => $id
-]);
+        );
+        $requete->execute([
+            'name' => $name,
+            'email' => $email,
+            'phone_number' => $phoneNumber,
+            'id' => $id
+        ]);
+    }
 }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

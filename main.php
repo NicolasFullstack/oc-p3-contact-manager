@@ -6,15 +6,17 @@ require_once 'src/Command.php';
 
 while (true) {
     $line = readline("Entrez votre commande : ");
+    $commandFound = false;
 
  if ($line === 'list') {
+    $commandFound = true;
     $command = new Command();
     $command->list();
 }
 
 if (preg_match('/^detail ([0-9]+)$/', $line, $matches)) 
 {
-
+$commandFound = true;
     $command = new Command();
 
     $command->detail($matches[1]);
@@ -22,6 +24,7 @@ if (preg_match('/^detail ([0-9]+)$/', $line, $matches))
 
 if (preg_match('/^create (.+),(.+),(.+)$/', $line, $matches)) 
 {
+$commandFound = true;
 $command = new Command();
 
     $command->create(
@@ -31,20 +34,10 @@ $command = new Command();
     );
 }
 
-if (preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
-
-    $command = new Command();
-
-    $command->delete($matches[1]);
-}
-
-if ($line === 'help') {
-    $command = new Command();
-    $command->help();
-}
 
     if (preg_match('/^modify ([0-9]+),(.+),(.+),(.+)$/', $line, $matches)) {
 
+        $commandFound = true;
         $command = new Command();
 
         $command->modify(
@@ -54,4 +47,32 @@ if ($line === 'help') {
             $matches[4]
         );
     }
+
+
+if (preg_match('/^delete ([0-9]+)$/', $line, $matches)) {
+
+$commandFound = true;
+    $command = new Command();
+
+    $command->delete($matches[1]);
+}
+
+
+if ($line === 'quit') {
+    $commandFound = true;
+    echo "Au revoir !" . PHP_EOL;
+    break;
+}
+
+
+if ($line === 'help') {
+    $commandFound = true;
+    $command = new Command();
+    $command->help();
+}
+
+    }
+
+    if (!$commandFound) {
+    echo "Commande inconnue ou mal formatée. Tapez help pour voir les commandes disponibles." . PHP_EOL;
 }
