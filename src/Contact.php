@@ -1,5 +1,11 @@
 <?php
 
+
+/**
+ * Représente un contact de l'application.
+ * Cette classe contient les informations d'un contact
+ * ainsi que les méthodes permettant d'y accéder.
+ */
 class Contact
 {
     private string $name;
@@ -46,6 +52,12 @@ public function getId(): int
     {
         $this->phone_number = $phone_number;
     }
+
+
+    /**
+     * Retourne le contact sous forme de chaîne de caractères.
+     * Cette méthode est appelée automatiquement lors d'un echo.
+     */
 public function __toString(): string
 {
     return $this->id . " - " .
